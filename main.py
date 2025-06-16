@@ -13,17 +13,17 @@ def handle_ai(name):
 
     # Display genres
     print(Fore.GREEN + "Available Genres:")
-    for idx, genre in enumerate(genres, 1):
+    for idx, genre in enumerate(genre, 1):
         print(f"{Fore.CYAN}{idx}. {genre}")
     print()
 
     # Genre input
     while True:
         genre_input = input(Fore.YELLOW + "Enter genre number or name: ").strip()
-        if genre_input.isdigit() and 1 <= int(genre_input) <= len(genres):
-            genre = genres[int(genre_input)-1]
+        if genre_input.isdigit() and 1 <= int(genre_input) <= len(genre):
+            genre = genre[int(genre_input)-1]
             break
-        elif genre_input.title() in genres:
+        elif genre_input.title() in genre:
             genre = genre_input.title()
             break
         print(Fore.RED + "Invalid input. Try again.\n")
@@ -54,11 +54,11 @@ def handle_ai(name):
     print(f"{Fore.BLUE}\nFinding movies for {name}", end="", flush=True)
     processing_animation()
 
-    recs = recommend_movies(genre=genre, mood=mood, rating=rating, top_n=5)
+    recs = recommend_movies(genre=genre, mood=mood, rating=rating, top_n=5) # type: ignore
     if isinstance(recs, str):
         print(Fore.RED + recs + "\n")
     else:
-        display_recommendations(recs, name)
+        display_recommendations(recs, name) # type: ignore
 
     # Ask for more
     while True:
@@ -67,10 +67,10 @@ def handle_ai(name):
             print(Fore.GREEN + f"\nEnjoy your movie picks, {name}! 🎬🍿\n")
             break
         elif action == 'yes':
-            recs = recommend_movies(genre=genre, mood=mood, rating=rating, top_n=5)
+            recs = recommend_movies(genre=genre, mood=mood, rating=rating, top_n=5) # type: ignore
             if isinstance(recs, str):
                 print(Fore.RED + recs + "\n")
             else:
-                display_recommendations(recs, name)
+                display_recommendations(recs, name) # type: ignore
         else:
             print(Fore.RED + "Invalid choice. Try again.\n")
